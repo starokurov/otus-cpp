@@ -1,8 +1,8 @@
 language: cpp
 before_script:
-- sudo apt-get install libboost-test-dev -y
-- echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list
-- sudo apt-get update -qq
+- echo "deb http://archive.ubuntu.com/ubuntu xenial main universe" | sudo tee -a /etc/apt/sources.list.d/xenial.list
+- sudo apt update
+- sudo apt install libboost-test-dev -y
 script:
 - cmake .
 - cmake --build .
