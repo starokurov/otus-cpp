@@ -6,9 +6,6 @@ find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_STANDARD_REQUIRED on)
-
 configure_file(version.h.in version.h)
 
 add_executable(helloworld_cli main.cpp)
@@ -39,15 +36,15 @@ target_link_libraries(test_version
 
 install(TARGETS helloworld_cli RUNTIME DESTINATION bin)
 
-# set(CPACK_GENERATOR DEB)
-SET(CPACK_GENERATOR "DOCKER")
-INCLUDE(CPack)
+set(CPACK_GENERATOR DEB)
+# set(CPACK_GENERATOR "DOCKER")
+include(CPack)
 
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
 set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
 set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 
-set(CPACK_PACKAGE_CONTACT otus.cpp@gmail.com)
+set(CPACK_PACKAGE_CONTACT luxon@inbox.ru)
 
 include(CPack)
 
