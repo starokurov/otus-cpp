@@ -1,7 +1,7 @@
 #include "lib.h"
 #include "version.h"
 
-int Test::version()
+int MyTest::version()
 {
     return PROJECT_VERSION_PATCH;
 }
