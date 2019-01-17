@@ -18,12 +18,12 @@ BOOST_AUTO_TEST_CASE(test_valid_version)
 BOOST_AUTO_TEST_SUITE_END()
 
 */
-
+/*
 TEST(MyTest, version) {
-       //MyTest t;
-       //EXPECT_LT( 0, t.version() );
+       MyTest t;
+       EXPECT_LT( 0, t.version() );
 }
-    
+*/   
     
 int main(int argc, char **argv)
 {
