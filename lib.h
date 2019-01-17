@@ -4,7 +4,7 @@
 
 // using namespace std;
 
-class MyTest : public ::testing::Test {
+class MyTest {
   public:
     int version();
 };
