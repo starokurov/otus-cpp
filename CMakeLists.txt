@@ -2,10 +2,12 @@ cmake_minimum_required(VERSION 3.2)
 
 project(helloworld VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
+find_package(Threads REQUIRED)
+
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 include(ExternalProject)
-ExternalProject_Add(googletest
+ExternalProject_Add(gtest
   GIT_REPOSITORY    https://github.com/google/googletest.git
   GIT_TAG           master
   SOURCE_DIR        "${CMAKE_BINARY_DIR}/googletest-src"
@@ -16,8 +18,9 @@ ExternalProject_Add(googletest
   TEST_COMMAND      ""
 )
 
+# Get GTest source and binary directories from CMake project
+ExternalProject_Get_Property(gtest source_dir binary_dir)
 
-find_package(Threads REQUIRED)
 
 configure_file(version.h.in version.h)
 
@@ -26,6 +29,14 @@ add_executable(helloworld_cli main.cpp)
 add_library(helloworld lib.cpp)
 
 add_executable(test_version test_version.cpp)
+add_library(test_version IMPORTED STATIC GLOBAL)
+add_dependencies(test_version gtest)
+
+# Set libgtest properties
+set_target_properties(test_version PROPERTIES
+    "IMPORTED_LOCATION" "${binary_dir}/googlemock/gtest/libgtest.a"
+    "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
+)
 
 set_target_properties(helloworld_cli helloworld test_version PROPERTIES
     CXX_STANDARD 14
@@ -46,6 +57,8 @@ target_link_libraries(test_version
     ${Boost_LIBRARIES}
     helloworld
 )
+
+include_directories("${source_dir}/googletest/include")
 
 install(TARGETS helloworld_cli RUNTIME DESTINATION bin)
 
