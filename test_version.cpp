@@ -19,7 +19,6 @@ BOOST_AUTO_TEST_SUITE_END()
 
 */
 
-
 TEST(Test, version) {
        Test t;
        EXPECT_LT( 0, t.version() );
