@@ -87,6 +87,6 @@ set(CPACK_PACKAGE_CONTACT luxon@inbox.ru)
 
 include(CPack)
 
-# enable_testing()
+enable_testing()
 
-# add_test(test_version test_version)
+add_test(test_version test_version)
