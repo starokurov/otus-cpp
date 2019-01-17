@@ -30,7 +30,7 @@ add_library(helloworld lib.cpp)
 
 add_executable(test_version test_version.cpp)
 # add_library(test_version IMPORTED STATIC GLOBAL)
-# add_dependencies(test_version gtest)
+add_dependencies(test_version gtest)
 
 # Set libgtest properties
 set_target_properties(test_version PROPERTIES
