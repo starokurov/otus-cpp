@@ -2,9 +2,10 @@
 
 // using namespace std;
 
-class Test {
-    int version;
+class MyTest {
   public:
     int version();
+  private:
+    int version;
 };
 
