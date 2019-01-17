@@ -17,19 +17,21 @@ BOOST_AUTO_TEST_SUITE_END()
 
 
 /*
+
 TEST(CustomOutputTest, PrintsMessage) {
-       EXPECT_TRUE( version() > 0 );
+       EXPECT_LT( 0, version() );
 }
     
-int _tmain(int argc, _TCHAR* argv[])
+    
+int main(int argc, char **argv)
 {
-   /*The method is initializes the Google framework and must be called before RUN_ALL_TESTS */
-   ::testing::InitGoogleTest(&argc, argv);
+    ::testing::InitGoogleTest(&argc, argv);
 
-   /*RUN_ALL_TESTS automatically detects and runs all the tests defined using the TEST macro. 
-   It's must be called only once in the code because multiple calls lead to conflicts and, 
-   therefore, are not supported.
-   */ 
-   return RUN_ALL_TESTS();
+    for (int i = 1; i < argc; ++i) {
+        printf("arg %2d = %s\n", i, argv[i]);
+    }
+
+    return RUN_ALL_TESTS();
 }
+
 */
