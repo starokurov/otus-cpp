@@ -5,7 +5,5 @@
 class MyTest {
   public:
     int version();
-  private:
-    int version;
 };
 
