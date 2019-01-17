@@ -2,7 +2,7 @@
 
 #include "version.h"
 
-int version()
+int Test::version()
 {
     return PROJECT_VERSION_PATCH;
 }
