@@ -21,7 +21,8 @@ BOOST_AUTO_TEST_SUITE_END()
 
 
 TEST(Test, version) {
-       EXPECT_LT( 0, version() );
+       Test t;
+       EXPECT_LT( 0, t.version() );
 }
     
     
