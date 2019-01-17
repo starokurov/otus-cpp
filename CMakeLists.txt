@@ -28,13 +28,23 @@ add_executable(helloworld_cli main.cpp)
 
 add_library(helloworld lib.cpp)
 
-add_executable(test_version test_version.cpp)
-# add_library(test_version IMPORTED STATIC GLOBAL)
+# add_executable(test_version test_version.cpp)
+add_library(test_version IMPORTED STATIC GLOBAL)
 add_dependencies(test_version gtest)
 
 # Set libgtest properties
 set_target_properties(test_version PROPERTIES
     "IMPORTED_LOCATION" "${binary_dir}/googlemock/gtest/libgtest.a"
+    "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
+)
+
+# Create a libgmock target to be used as a dependency by test programs
+add_library(libgmock IMPORTED STATIC GLOBAL)
+add_dependencies(libgmock gtest)
+
+# Set libgmock properties
+set_target_properties(libgmock PROPERTIES
+    "IMPORTED_LOCATION" "${binary_dir}/googlemock/libgmock.a"
     "IMPORTED_LINK_INTERFACE_LIBRARIES" "${CMAKE_THREAD_LIBS_INIT}"
 )
 
@@ -44,10 +54,15 @@ set_target_properties(helloworld_cli helloworld test_version PROPERTIES
     COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
 )
 
-set_target_properties(test_version PROPERTIES
-    COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
+# I couldn't make it work with INTERFACE_INCLUDE_DIRECTORIES
+include_directories("${source_dir}/googletest/include"
+                    "${source_dir}/googlemock/include")
+
+
+#set_target_properties(test_version PROPERTIES
+#    COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
 #    INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
-)
+#)
 
 target_link_libraries(helloworld_cli
     helloworld
