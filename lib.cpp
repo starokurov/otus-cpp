@@ -1,5 +1,4 @@
 #include "lib.h"
-
 #include "version.h"
 
 int Test::version()
