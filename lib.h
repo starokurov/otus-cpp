@@ -3,7 +3,7 @@
 // using namespace std;
 
 class Test {
-    int version = 0;
+    int version;
   public:
     int version();
 };
