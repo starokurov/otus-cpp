@@ -4,7 +4,7 @@ project(helloworld VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 find_package(Threads REQUIRED)
 
-find_package(Boost COMPONENTS unit_test_framework REQUIRED)
+// find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
 include(ExternalProject)
 ExternalProject_Add(gtest
@@ -29,7 +29,7 @@ add_executable(helloworld_cli main.cpp)
 add_library(helloworld lib.cpp)
 
 add_executable(test_version test_version.cpp)
-add_library(test_version IMPORTED STATIC GLOBAL)
+// add_library(test_version IMPORTED STATIC GLOBAL)
 add_dependencies(test_version gtest)
 
 # Set libgtest properties
@@ -46,7 +46,7 @@ set_target_properties(helloworld_cli helloworld test_version PROPERTIES
 
 set_target_properties(test_version PROPERTIES
     COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
-    INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
+//    INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
 )
 
 target_link_libraries(helloworld_cli
@@ -54,7 +54,7 @@ target_link_libraries(helloworld_cli
 )
 
 target_link_libraries(test_version
-    ${Boost_LIBRARIES}
+//    ${Boost_LIBRARIES}
     helloworld
 )
 
