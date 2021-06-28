@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.2)
 
-project(helloworld VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
+set(PATCH_VERSION "0" CACHE PATH "Number for the patch part of the version.")
+
+project(helloworld VERSION 0.0.1)
 
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
