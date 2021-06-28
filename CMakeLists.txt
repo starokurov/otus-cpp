@@ -1,8 +1,9 @@
 cmake_minimum_required(VERSION 3.2)
 
-set(PATCH_VERSION "0" CACHE PATH "Number for the patch part of the version.")
+set(PATCH_VERSION "1" CACHE INTERNAL "Patch version")
+set(PROJECT_VESRION 0.0.${PATCH_VERSION})
 
-project(helloworld VERSION 0.0.1)
+project(helloworld VERSION ${PROJECT_VESRION})
 
 find_package(Boost COMPONENTS unit_test_framework REQUIRED)
 
