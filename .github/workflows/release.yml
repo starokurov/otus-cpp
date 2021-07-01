@@ -17,8 +17,6 @@ jobs:
         run: |
           sudo cmake .
           sudo cmake --build . --target install
-          sudo ln -s /usr/lib/libgtest.a /usr/local/lib/libgtest.a
-          sudo ln -s /usr/lib/libgtest_main.a /usr/local/lib/libgtest_main.a
       - name: Boost install
         run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
       - name: Project checkout
