@@ -19,7 +19,7 @@ jobs:
       - name: Boost install
         run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
       - name: Project checkout
-      - uses: actions/checkout@v2
+        uses: actions/checkout@v2
         with:
           submodules: true
       - name: Project build
