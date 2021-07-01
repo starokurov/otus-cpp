@@ -10,14 +10,23 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: GTest download
+        run: git clone https://github.com/google/googletest.git googletest
+      - name: GTest compile and install
+        working-directory: ./googletest
+        run: cmake .
+        run: cmake --build . --target install
+      - name: Boost install
+        run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
+      - name: Project checkout
       - uses: actions/checkout@v2
         with:
           submodules: true
-      - run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
-      - run: cmake . -DPATCH_VERSION=${{ github.run_number }}
-      - run: cmake --build .
-      - run: cmake --build . --target test
-      - run: cmake --build . --target package
+      - name: Project build
+        run: cmake . -DPATCH_VERSION=${{ github.run_number }}
+        run: cmake --build .
+        run: cmake --build . --target test
+        run: cmake --build . --target package
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
