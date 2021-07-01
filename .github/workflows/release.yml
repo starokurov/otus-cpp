@@ -14,8 +14,9 @@ jobs:
         run: git clone https://github.com/google/googletest.git googletest
       - name: GTest compile and install
         working-directory: ./googletest
-        run: cmake .
-        run: cmake --build . --target install
+        run: |
+          cmake .
+          cmake --build . --target install
       - name: Boost install
         run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
       - name: Project checkout
@@ -23,10 +24,11 @@ jobs:
         with:
           submodules: true
       - name: Project build
-        run: cmake . -DPATCH_VERSION=${{ github.run_number }}
-        run: cmake --build .
-        run: cmake --build . --target test
-        run: cmake --build . --target package
+        run: |
+          cmake . -DPATCH_VERSION=${{ github.run_number }}
+          cmake --build .
+          cmake --build . --target test
+          cmake --build . --target package
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
