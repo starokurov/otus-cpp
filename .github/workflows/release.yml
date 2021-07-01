@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Project checkout
+        uses: actions/checkout@v2
+        with:
+          submodules: true
       - name: GTest download
         run: git clone https://github.com/google/googletest.git googletest
       - name: GTest compile and install
@@ -19,10 +23,6 @@ jobs:
           sudo cmake --build . --target install
       - name: Boost install
         run: sudo apt-get update && sudo apt-get install libboost-test-dev -y
-      - name: Project checkout
-        uses: actions/checkout@v2
-        with:
-          submodules: true
       - name: Project build
         run: |
           cmake . -DPATCH_VERSION=${{ github.run_number }}
